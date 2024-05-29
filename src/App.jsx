@@ -7,7 +7,24 @@ export default function App() {
     bolsaDePuntos: "1804",
     producto: "Enchiladas Verdes",
     valorProducto: "110",
+    txPorDia: "10",
+    tkPromedio: "80",
+    txPorMes: "3",
+    txTotales: "150",
+    puntosOtorgados: "1455",
+    utilidadNegocio: "25",
   });
+
+  let puntosOtorgados = Number(inputs.valorProducto) / 5;
+  let valorEnPuntos = inputs.valorProducto * 10;
+  let ventaDiaria = inputs.tkPromedio * inputs.txPorDia;
+  let puntosUsadosBolsa = (ventaDiaria / 5) * 25;
+  let puntosSumadosBolsa = 150 * inputs.txPorMes;
+  let valorPesoPuntos = (ventaDiaria / 5) * 25 * 5;
+  let ValorPuntosBalance = Math.round(
+    (puntosSumadosBolsa + (inputs.bolsaDePuntos - puntosUsadosBolsa)) * 0.1
+  );
+  let ventaGeneradaPuntos = inputs.puntosOtorgados * 5;
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -40,7 +57,7 @@ export default function App() {
                 name="bolsaDePuntos"
                 value={inputs.bolsaDePuntos}
                 onChange={handleInputChange}
-                className="border border-none bg-spin-blue w-4/12 text-center "
+                className="border border-none bg-spin-blue w-3/12 text-center "
               ></input>
             </div>
           </div>
@@ -49,7 +66,7 @@ export default function App() {
           </div>
         </Caja>
         <Caja>
-          <div className="bg-spin-blue text-white rounded-md grid grid-cols-2 col-span-2 m-[-4px]">
+          <div className=" bg-spin-blue text-white rounded-md grid grid-cols-2 col-span-2 m-[-4px]">
             <div>
               Por cada{" "}
               <span className="text-orange-400">
@@ -62,21 +79,25 @@ export default function App() {
             </div>
             <div className="m-auto">Si doy puntos</div>
           </div>
-          <div className=" text-yellow-400 font-bold ">
+          <div className=" text-yellow-400 font-bold">
             <input
               type="text"
               name="producto"
               value={inputs.producto}
               onChange={handleInputChange}
+              className="w-11/12 text-center"
+              placeholder="Producto que vende"
             ></input>
           </div>
           <div className=" text-yellow-400 font-bold ">
+            $
             <input
               type="text"
               name="valorProducto"
               value={inputs.valorProducto}
               onChange={handleInputChange}
-              className="w-6/12 text-center"
+              className="w-9/12 text-center"
+              placeholder="Precio / producto"
             ></input>
           </div>
           <div>Puntos Otorgados</div>
@@ -99,15 +120,15 @@ export default function App() {
             <div className="m-auto">Si me pagan con puntos</div>
           </div>
           <div className=" text-yellow-400 font-bold ">{inputs.producto}</div>
-          <div>1,100</div>
+          <div>Valor en Puntos {inputs.valorProducto * 10}</div>
           <div>Equivalente en "$"</div>
-          <div>$110</div>
+          <div>${inputs.valorProducto}</div>
           <div>
             Cantidad de visitas acumulando puntos para obtener este producto
             Gratis
           </div>
           <div className="flex justify-center items-center h-full w-full">
-            50
+            {valorEnPuntos / puntosOtorgados}
           </div>
         </Caja>
         <Caja>
@@ -116,11 +137,29 @@ export default function App() {
             <div>Diario</div>
           </div>
           <div>Transacciones por dia</div>
-          <div>10</div>
-          <div>ticket promedio</div>
-          <div>$80</div>
+          <div className=" text-yellow-400 font-bold">
+            <input
+              type="text"
+              name="txPorDia"
+              value={inputs.txPorDia}
+              onChange={handleInputChange}
+              className="w-9/12 text-center"
+              placeholder="Tx Estimadas"
+            ></input>
+          </div>
+          <div>Ticket promedio</div>
+          <div className=" text-yellow-400 font-bold">
+            <input
+              type="text"
+              name="tkPromedio"
+              value={inputs.tkPromedio}
+              onChange={handleInputChange}
+              className="w-9/12 text-center"
+              placeholder="Valor Ticket Promedio"
+            ></input>
+          </div>
           <div>Venta diaria</div>
-          <div>$800</div>
+          <div>${inputs.tkPromedio * inputs.txPorDia}</div>
         </Caja>
         <Caja>
           <div className="bg-spin-blue text-white rounded-md grid grid-cols-2 col-span-2 m-[-4px]">
@@ -128,13 +167,13 @@ export default function App() {
             <div>Mensual</div>
           </div>
           <div>puntos utilizados por un dia</div>
-          <div>160</div>
+          <div>{ventaDiaria / 5}</div>
           <div>puntos utilizados de mi bolsa</div>
-          <div>4000</div>
+          <div>{(ventaDiaria / 5) * 25}</div>
           <div>Puntos que me restan</div>
-          <div>-2196</div>
+          <div>{inputs.bolsaDePuntos - puntosUsadosBolsa}</div>
           <div>Valor en "$" de los puntos</div>
-          <div>$20,000</div>
+          <div>${valorPesoPuntos}</div>
         </Caja>
         <Caja>
           <div className="bg-spin-blue text-white rounded-md grid grid-cols-2 col-span-2 m-[-4px]">
@@ -142,11 +181,20 @@ export default function App() {
             <div>Diario</div>
           </div>
           <div>Transacciones por mes</div>
-          <div>3</div>
+          <div className=" text-yellow-400 font-bold">
+            <input
+              type="text"
+              name="txPorMes"
+              value={inputs.txPorMes}
+              onChange={handleInputChange}
+              className="w-9/12 text-center"
+              placeholder="Tx Por Mes"
+            ></input>
+          </div>
           <div>Promedio gastado por usuario</div>
           <div>$15</div>
           <div>Valor en puntos</div>
-          <div>150</div>
+          <div>${15 * 10}</div>
         </Caja>
         <Caja>
           <div className="bg-spin-blue text-white rounded-md grid grid-cols-2 col-span-2 m-[-4px]">
@@ -154,26 +202,69 @@ export default function App() {
             <div>Mensual</div>
           </div>
           <div>Puntos que se suman a mi bolsa</div>
-          <div>450</div>
+          <div className="m-auto">{150 * inputs.txPorMes}</div>
           <div>Balance total de puntos por mes</div>
-          <div>-175</div>
+          <div>
+            {puntosSumadosBolsa + (inputs.bolsaDePuntos - puntosUsadosBolsa)}
+          </div>
+          <div>Valor en $ de los puntos del Balance</div>
+          <div>
+            {Math.round(
+              (puntosSumadosBolsa +
+                (inputs.bolsaDePuntos - puntosUsadosBolsa)) *
+                0.1
+            )}
+          </div>
           <div>Venta de $ con mi bolsa de puntos</div>
-          <div>$19,825</div>
+          <div>${valorPesoPuntos + ValorPuntosBalance}</div>
         </Caja>
         <Caja>
           <div className="col-span-2 bg-spin-blue m-[-4px] text-white rounded-md">
             ¿Como recupero mi inversion?
           </div>
           <div>Transacciones Totales</div>
-          <div>150</div>
+          <div className=" text-yellow-400 font-bold">
+            <input
+              type="text"
+              name="txTotales"
+              value={inputs.txTotales}
+              onChange={handleInputChange}
+              className="w-9/12 text-center"
+              placeholder="por defecto 150"
+            ></input>
+          </div>
           <div>Puntos Totales otorgados</div>
-          <div>1455</div>
+          <div className=" text-yellow-400 font-bold">
+            <input
+              type="text"
+              name="puntosOtorgados"
+              value={inputs.puntosOtorgados}
+              onChange={handleInputChange}
+              className="w-9/12 text-center"
+              placeholder="Por defecto 1455"
+            ></input>
+          </div>
           <div>Venta Generada por puntos</div>
-          <div>$7,275</div>
+          <div className="m-auto">${inputs.puntosOtorgados * 5}</div>
           <div>Utilidad del negocio</div>
-          <div>25%</div>
+          <div className=" text-yellow-400 font-bold">
+            <input
+              type="text"
+              name="utilidadNegocio"
+              value={inputs.utilidadNegocio}
+              onChange={handleInputChange}
+              className="w-2/12 text-center"
+              placeholder="Por defecto 25%"
+            ></input>
+            %
+          </div>
           <div>Ingreso neto por puntos</div>
-          <div>$1819</div>
+          <div>
+            $
+            {Math.round(
+              ventaGeneradaPuntos * ((inputs.utilidadNegocio * 10) / 1000)
+            )}
+          </div>
         </Caja>
         <Caja columnas="grid-cols-3">
           <div className="col-span-3  bg-spin-blue m-[-4px] text-white rounded-md">

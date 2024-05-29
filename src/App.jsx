@@ -64,7 +64,7 @@ export default function App() {
                   name="bolsaDePuntos"
                   value={inputs.bolsaDePuntos}
                   onChange={handleInputChange}
-                  className="border border-none bg-spin-blue w-3/12 text-center "
+                  className="border border-none bg-spin-blue w-6/12 text-center "
                 ></input>
               </div>
             </div>
@@ -264,7 +264,7 @@ export default function App() {
                 name="utilidadNegocio"
                 value={inputs.utilidadNegocio}
                 onChange={handleInputChange}
-                className="w-2/12 text-center bg-slate-200"
+                className="w-4/12 text-center bg-slate-200"
                 placeholder="Por defecto 25%"
               ></input>
               %

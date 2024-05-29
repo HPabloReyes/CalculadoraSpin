@@ -6,7 +6,7 @@ export default function Caja({
 }) {
   return (
     <div
-      className={`grid ${columnas} gap-2 ${color} p-1 text-center rounded-md ${letra}`}
+      className={`grid ${columnas} gap-2 ${color} p-1 text-center rounded-md ${letra} font-roboto `}
     >
       {children}
     </div>

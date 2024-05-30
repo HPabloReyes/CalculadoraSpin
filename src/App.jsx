@@ -37,7 +37,7 @@ export default function App() {
   return (
     <>
       <header className="mb-2">
-        <img src="/spnegocios.png" className="rounded-md"></img>
+        <img src="/spnegocios.png" className="rounded-md m-auto"></img>
       </header>
       <h1 className="text-center font-roboto font-bold mb-2 text-xl ">
         Calculadora de puntos SPIN
@@ -50,15 +50,14 @@ export default function App() {
               $ {Number(inputs.bolsaDePuntos) * 5}
             </div>
             <div className="grid grid-cols-2 col-span-2">
-              <div> Costo de la membresía</div> <div> $ 500</div>
+              <div> Costo de la membresía</div> <div>$ 210</div>
             </div>
             <div className="grid grid-cols-2 col-span-2">
-              <div> Inversion diaria </div> <div> $ 19.30</div>
+              <div> Inversion diaria </div> <div> $ 7.00</div>
             </div>
             <div className="grid grid-cols-2 col-span-2">
               <div> Bolsa de puntos </div>
               <div className=" text-yellow-400 font-bold border-b-2 border-gray-800">
-                $
                 <input
                   type="text"
                   name="bolsaDePuntos"
@@ -110,7 +109,7 @@ export default function App() {
             <div>Puntos Otorgados</div>
             <div>{Number(inputs.valorProducto) / 5}</div>
             <div>Equivalente en $</div>
-            <div>${(Number(inputs.valorProducto) / 5) * 0.1}</div>
+            <div>${Math.round((inputs.valorProducto / 5) * 0.1)}</div>
           </Caja>
           <Caja color="bg-slate-200">
             <div className="bg-spin-blue text-white rounded-md grid grid-cols-2 col-span-2 m-[-4px]">
@@ -170,7 +169,6 @@ export default function App() {
             <div>Venta diaria</div>
             <div>${inputs.tkPromedio * inputs.txPorDia}</div>
           </Caja>
-          <div className="bg-custom-gradient h-1"> </div>
           <Caja color="bg-slate-200">
             <div className="bg-spin-blue text-white rounded-md grid grid-cols-2 col-span-2 m-[-4px]">
               <div>Cómo se ve mi bolsa de puntos?</div>
@@ -279,10 +277,10 @@ export default function App() {
           </Caja>
           <Caja color={"bg-spin-blue"} letra={"text-white"}>
             <div className="col-span-2">
-              Mayor a $579, si se recupera el costo de la membresía
+              Mayor a $210, si se recupera el costo de la membresía
             </div>
             <div className="col-span-2">
-              Menor a $579, No se recupera el costo de la membresía
+              Menor a $210, No se recupera el costo de la membresía
             </div>
           </Caja>
           <div className="bg-custom-gradient h-1"> </div>

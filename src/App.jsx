@@ -57,7 +57,7 @@ export default function App() {
             </div>
             <div className="grid grid-cols-2 col-span-2">
               <div> Bolsa de puntos </div>
-              <div className=" text-yellow-400 font-bold border-b-2 border-gray-800">
+              <div className=" text-yellow-400 font-bold border-b-2 border-white">
                 <input
                   type="text"
                   name="bolsaDePuntos"
@@ -109,7 +109,12 @@ export default function App() {
             <div>Puntos Otorgados</div>
             <div>{Number(inputs.valorProducto) / 5}</div>
             <div>Equivalente en $</div>
-            <div>${Math.round((inputs.valorProducto / 5) * 0.1)}</div>
+            <div>
+              ${" "}
+              {(inputs.valorProducto / 5) * 0.1 > 0.99
+                ? Math.round((inputs.valorProducto / 5) * 0.1)
+                : ((inputs.valorProducto / 5) * 0.1).toString().substring(0, 4)}
+            </div>
           </Caja>
           <Caja color="bg-slate-200">
             <div className="bg-spin-blue text-white rounded-md grid grid-cols-2 col-span-2 m-[-4px]">
@@ -136,7 +141,13 @@ export default function App() {
               Gratis
             </div>
             <div className="flex justify-center items-center h-full w-full">
-              {valorEnPuntos / puntosOtorgados}
+              {isNaN(valorEnPuntos / puntosOtorgados) ? (
+                <span className="text-orange-400 ">
+                  <b>" Ingrese un precio para el producto "</b>
+                </span>
+              ) : (
+                valorEnPuntos / puntosOtorgados
+              )}
             </div>
           </Caja>
           <Caja color="bg-slate-200">
@@ -254,7 +265,7 @@ export default function App() {
               ></input>
             </div>
             <div>Venta Generada por puntos</div>
-            <div className="m-auto">${inputs.puntosOtorgados * 5}</div>
+            <div className="m-auto">$ {inputs.puntosOtorgados * 5}</div>
             <div>Utilidad del negocio</div>
             <div className=" text-yellow-400 font-bold border-b-2 border-gray-500">
               <input
@@ -262,7 +273,7 @@ export default function App() {
                 name="utilidadNegocio"
                 value={inputs.utilidadNegocio}
                 onChange={handleInputChange}
-                className="w-4/12 text-center bg-slate-200"
+                className="w-1/12 text-center bg-slate-200"
                 placeholder="Por defecto 25%"
               ></input>
               %
